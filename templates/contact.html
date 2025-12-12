@@ -1,143 +1,229 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Contactez-moi</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact • Interface Next-Gen</title>
 
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Poppins', sans-serif;
-            background: url('https://images.unsplash.com/photo-1499084732479-de2c02d45fc4?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat fixed;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            overflow: hidden;
-        }
+<style>
+:root{
+  --bg:#05070f;
+  --panel:#0b1020;
+  --line:#1f2a44;
+  --accent:#00f5ff;
+  --accent2:#7c7cff;
+  --text:#e8ebff;
+  --muted:#9aa4ff;
+}
 
-        /* Background animated gradient */
-        .gradient-bg {
-            position: absolute;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle at 30% 30%, rgba(0,255,150,0.4), transparent),
-                        radial-gradient(circle at 70% 70%, rgba(0,150,255,0.4), transparent);
-            animation: move 8s infinite alternate ease-in-out;
-            z-index: -1;
-        }
+*{box-sizing:border-box}
 
-        @keyframes move {
-            from { transform: translateX(-10%) translateY(-10%); }
-            to   { transform: translateX(10%) translateY(10%); }
-        }
+body{
+  margin:0;
+  min-height:100vh;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  background:
+    radial-gradient(1000px 500px at 20% 20%, rgba(0,245,255,.08), transparent 60%),
+    radial-gradient(800px 500px at 80% 70%, rgba(124,124,255,.08), transparent 60%),
+    var(--bg);
+  color:var(--text);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+}
 
-        .container {
-            width: 90%;
-            max-width: 600px;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(12px);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
-            animation: fadeIn 0.6s ease-out;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
+/* Stars */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background-image:
+    radial-gradient(1px 1px at 10% 20%, white, transparent),
+    radial-gradient(1px 1px at 80% 30%, white, transparent),
+    radial-gradient(1px 1px at 40% 70%, white, transparent),
+    radial-gradient(1px 1px at 70% 90%, white, transparent);
+  opacity:.4;
+  pointer-events:none;
+}
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+.panel{
+  width:100%;
+  max-width:700px;
+  background:linear-gradient(180deg, #0b1020, #070b18);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:28px;
+  position:relative;
+}
 
-        h2 {
-            text-align: center;
-            font-size: 32px;
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
+/* glowing corners */
+.panel::before{
+  content:"";
+  position:absolute;
+  inset:-1px;
+  border-radius:14px;
+  background:
+    linear-gradient(90deg, transparent, var(--accent), transparent),
+    linear-gradient(180deg, transparent, var(--accent2), transparent);
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  padding:1px;
+  opacity:.5;
+  pointer-events:none;
+}
 
-        .line {
-            width: 80px;
-            height: 3px;
-            background: #18e07b;
-            margin: 0 auto 25px;
-            border-radius: 10px;
-        }
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:24px;
+}
 
-        label {
-            display: block;
-            margin-top: 18px;
-            font-weight: 400;
-            color: #cfcfcf;
-        }
+.title{
+  font-size:1.5rem;
+  letter-spacing:1px;
+}
 
-        input[type="text"], textarea {
-            width: 100%;
-            padding: 12px;
-            margin-top: 8px;
-            background: rgba(255,255,255,0.08);
-            border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 10px;
-            color: white;
-            font-size: 15px;
-            transition: 0.2s;
-        }
+.status{
+  font-size:.8rem;
+  color:var(--accent);
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
 
-        input[type="text"]:focus, textarea:focus {
-            border-color: #18e07b;
-            box-shadow: 0 0 10px rgba(24, 224, 123, 0.6);
-            outline: none;
-        }
+.status span{
+  width:8px;
+  height:8px;
+  background:var(--accent);
+  border-radius:50%;
+  box-shadow:0 0 12px var(--accent);
+}
 
-        button {
-            width: 100%;
-            background: linear-gradient(135deg, #18e07b, #0fb86a);
-            color: #0f0f0f;
-            padding: 14px;
-            border: none;
-            border-radius: 12px;
-            cursor: pointer;
-            font-size: 17px;
-            margin-top: 30px;
-            font-weight: bold;
-            transition: 0.2s;
-        }
+p.desc{
+  color:var(--muted);
+  margin-bottom:28px;
+  line-height:1.5;
+}
 
-        button:hover {
-            transform: scale(1.03);
-            box-shadow: 0 0 12px rgba(24, 224, 123, 0.6);
-        }
+form{
+  display:grid;
+  gap:18px;
+}
 
-        .note {
-            margin-top: 20px;
-            color: #9e9e9e;
-            text-align: center;
-            font-size: 0.9em;
-        }
-    </style>
+.group{
+  display:flex;
+  flex-direction:column;
+}
+
+label{
+  font-size:.85rem;
+  color:var(--muted);
+  margin-bottom:6px;
+}
+
+input, textarea{
+  background:transparent;
+  border:1px solid var(--line);
+  border-radius:8px;
+  padding:12px;
+  color:var(--text);
+  font-size:1rem;
+  outline:none;
+}
+
+input:focus, textarea:focus{
+  border-color:var(--accent);
+  box-shadow:0 0 0 2px rgba(0,245,255,.15);
+}
+
+textarea{
+  min-height:140px;
+  resize:vertical;
+}
+
+.actions{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:16px;
+  flex-wrap:wrap;
+}
+
+button{
+  background:linear-gradient(90deg, var(--accent), var(--accent2));
+  color:#05070f;
+  font-weight:700;
+  border:none;
+  border-radius:999px;
+  padding:12px 22px;
+  cursor:pointer;
+  transition:transform .15s ease, box-shadow .15s ease;
+}
+
+button:hover{
+  transform:translateY(-2px);
+  box-shadow:0 10px 30px rgba(0,245,255,.3);
+}
+
+.note{
+  font-size:.8rem;
+  color:var(--muted);
+  opacity:.8;
+}
+
+.footer{
+  margin-top:24px;
+  font-size:.75rem;
+  color:rgba(255,255,255,.4);
+  border-top:1px solid var(--line);
+  padding-top:14px;
+}
+</style>
 </head>
+
 <body>
-    <div class="gradient-bg"></div>
-    <div class="container">
-        <h2>📧 Laissez-moi un message</h2>
-        <div class="line"></div>
-        <form>
-            <label for="nom">Nom :</label>
-            <input type="text" id="nom" name="nom" required />
 
-            <label for="prenom">Prénom :</label>
-            <input type="text" id="prenom" name="prenom" required />
+<div class="panel">
+  <div class="header">
+    <div class="title">CONTACT — TERMINAL 02</div>
+    <div class="status"><span></span> ONLINE</div>
+  </div>
 
-            <label for="message">Votre Message :</label>
-            <textarea id="message" name="message" rows="5" required></textarea>
+  <p class="desc">
+    Interface de communication nouvelle génération.  
+    Les données ne sont pas réellement transmises (mode simulation).
+  </p>
 
-            <button type="submit">Envoyer (Simulation)</button>
-            <p class="note">*L'enregistrement des données n'est pas actif pour cet exercice.</p>
-        </form>
+  <form>
+    <div class="group">
+      <label>Nom</label>
+      <input type="text" placeholder="Ex: Durand" required>
     </div>
+
+    <div class="group">
+      <label>Prénom</label>
+      <input type="text" placeholder="Ex: Noha" required>
+    </div>
+
+    <div class="group">
+      <label>Message</label>
+      <textarea placeholder="Rédige ton message…" required></textarea>
+    </div>
+
+    <div class="actions">
+      <button type="submit">TRANSMETTRE</button>
+      <div class="note">Ctrl + Entrée pour envoyer</div>
+    </div>
+  </form>
+
+  <div class="footer">
+    © 2086 — Module de contact expérimental
+  </div>
+</div>
+
 </body>
 </html>
